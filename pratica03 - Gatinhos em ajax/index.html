@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gatos desgraçados</title>
+
+    <style>
+        #gatos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            >div {
+                object-fit: cover;
+                border-radius: 1em;
+                max-width: 200px;
+                height: auto;
+
+                >img {
+                    width: 100%;
+                    height: auto;
+
+                }
+            }
+        }
+
+        #carros {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            >div {
+                object-fit: cover;
+                border-radius: 1em;
+                max-width: 200px;
+                height: auto;
+
+                padding: 1em;
+                border: 1px solid black;
+
+                >img {
+                    width: 100%;
+                    height: auto;
+
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Gatos desgraçados</h1>
+    <button id="chamar_mais_gatos_button">Chamar mais gatos desgraçados</button>
+    <div id="gatos"></div>
+
+    <hr>
+
+    <h1>Carros legais</h1>
+    <button id="ver_carros_button">Ver carros legais</button>
+    <div id="carros"></div>
+
+
+    <script>
+        // Gatos
+
+        const gatos = document.getElementById('gatos')
+        const chamarMaisGatosButton = document.getElementById('chamar_mais_gatos_button')
+
+        const chamarMaisGatos = (e) => {
+            e.preventDefault()
+
+            const xhr = new XMLHttpRequest()
+
+            xhr.open('GET', 'https://api.thecatapi.com/v1/images/search?limit=10&page=1&order=Desc')
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    const response = JSON.parse(xhr.responseText)
+
+                    response.forEach((gato) => {
+                        const card = document.createElement('div')
+
+                        const img = document.createElement('img')
+                        img.src = gato.url
+                        img.alt = 'Gato desgraçado'
+
+                        card.append(img)
+
+                        const idAndSize = document.createElement('p')
+                        idAndSize.innerText = `ID: ${gato.id} - Tamanho: ${gato.width}x${gato.height}`
+
+                        card.append(idAndSize)
+
+                        gatos.appendChild(card)
+                    })
+                } else {
+                    console.log('Não deu certo')
+                }
+            }
+
+            xhr.send()
+        }
+
+        chamarMaisGatosButton.addEventListener('click', chamarMaisGatos);
+
+        // Carros
+
+        const carros = document.getElementById('carros')
+        const verCarrosButton = document.getElementById('ver_carros_button')
+
+        const verCarros = (e) => {
+            e.preventDefault()
+
+            const response = fetch('https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/data.json')
+
+            response.then((response) => {
+                return response.json()
+            }).then((response) => {
+                response.forEach((carro, index) => {
+                    if (index > 14) {
+                        return
+                    }
+
+                    const card = document.createElement('div')
+
+                    const img = document.createElement('img')
+                    img.src = carro.image.source
+                    img.alt = 'Carro legal'
+
+                    card.append(img)
+
+                    const carBrand = document.createElement('p')
+
+                    carBrand.innerText = carro.name
+
+                    card.append(carBrand)
+
+                    carros.appendChild(card)
+                })
+            })
+
+        }
+
+        verCarrosButton.addEventListener('click', verCarros)
+
+    </script>
+
+</body>
+
+</html>
