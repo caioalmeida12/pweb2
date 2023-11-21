@@ -1,0 +1,132 @@
+body {
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+}
+
+.search {
+    margin: 1em 0;
+}
+
+.user-card{
+    display: flex;
+    gap: 1em;
+    
+    .user-picture {
+        aspect-ratio: 1;
+        max-width: 25vw;
+
+        > img {
+            display: block;
+            max-width: 100%;
+
+            border-radius: .5em;
+        }
+    }
+
+    .user-data {
+        padding: 1em 2em;
+
+        border: 1px solid #e0e0e0;
+        border-radius: .5em;
+
+        > * {
+            margin: unset;
+        }
+        
+        > :first-child {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        > :nth-child(2) {
+            margin-top: .5em;
+            color: #666;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            flex-grow: 1;
+            gap: .5em;
+
+            
+        }
+        
+    }
+}
+
+.repos-title {
+    font-weight: bold;
+    text-align: center;
+}
+
+.repos {
+    padding: 1em 0em;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1em;
+
+
+    >div {
+        padding: 1em;
+        border: 1px solid #e0e0e0;
+        border-radius: .25em;
+        
+        display: grid;
+        grid-template-areas: 
+            "name name name"
+            "star fork issue"
+            "created license id";
+
+        row-gap: .5em;
+        column-gap: 1em;
+
+        >a {
+            text-decoration: none;
+            grid-area: name;
+            font-weight: bold;
+            color: black;
+
+            :hover {
+                text-decoration: underline;
+            }
+        }
+
+        >span {
+            font-size: .8em;
+            line-height: 1.6;
+
+            > :nth-of-type(1) {
+                grid-area: star;
+            }
+
+            > :nth-of-type(2) {
+                grid-area: fork;
+            }
+
+            > :nth-of-type(3) {
+                grid-area: issue;
+            }
+
+        }
+    }
+
+    > :nth-child(3n+2) {
+        background-color: #f0f0f0;
+    }
+
+    > :nth-child(3n) {
+        background-color: #e0e0e0;
+    }
+
+
+
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo Personalizado</title>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="search">
+        <input type="text" class="search" placeholder="Quem você deseja conhecer?">
+        <button>Buscar</button>
+    </div>
+    <div class="main">
+        <div class="user-card">
+            <div class="user-picture">
+                <img alt="Foto do GitHub do usuário">
+            </div>
+            <div class="user-data">
+                <p class="user-name"></p>
+                <p class="user-login"></p>
+                <div class="user-info">
+                    <p class="user-repos"></p>
+                    <p class="user-joined"></p>
+                    <p class="user-works-at"></p>
+                </div>
+                <a class="profile-on-github" target="_blank"></a>
+            </div>
+        </div>
+        <p class="repos-title">Repositórios do usuário:</p>
+        <div class="repos">
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/renderUsuario.js"></script>
+    <script src="js/buscarUsuario.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
