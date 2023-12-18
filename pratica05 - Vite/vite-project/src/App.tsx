@@ -19,7 +19,7 @@ function App() {
 
   return (
     <>
-      <h1 onMouseEnter={handleMouseEnter} style={{
+      <h1 onMouseEnter={handleMouseEnter} onClick={()=> alert("yoku yatta!")} style={{
         position: "fixed",
         left: posicao.x,
         top: posicao.y,
